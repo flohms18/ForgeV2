@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}À propos · Forge{% endblock %}
+
+{% block content %}
+
+{# ---------- Intro ---------- #}
+<section class="mx-auto flex max-w-[1200px] flex-wrap items-center gap-12 px-6 pt-20 pb-16">
+    <div class="flex flex-[1_1_560px] flex-col gap-6">
+        <p class="text-sm font-semibold uppercase tracking-[0.08em] text-brand-700">À propos</p>
+        <h1 class="font-display text-[clamp(36px,5vw,56px)] font-bold leading-[1.1]">
+            J'ai fait adopter la data à 100 collaborateurs chez Covéa. Aujourd'hui, je construis les outils <span class="text-brand-500">moi-même</span>.
+        </h1>
+        <p class="max-w-[640px] text-xl leading-relaxed text-muted">
+            Florent Trouillet, AI Builder. Je fais le lien entre le terrain et la technique : cadrer un besoin, construire l'agent, puis l'accompagner jusqu'à l'usage.
+        </p>
+    </div>
+    {# Remplacer par une photo : <img src="{% static 'img/portrait.jpg' %}" alt="Florent Trouillet" class="..."> #}
+    <div class="flex aspect-square flex-[0_1_320px] items-center justify-center rounded-2xl bg-brand-50 font-display text-7xl font-bold text-brand-600" aria-hidden="true">FT</div>
+</section>
+
+{# ---------- Méthode ---------- #}
+<section class="mx-auto flex max-w-[1200px] flex-col gap-8 px-6 py-16">
+    <div class="flex flex-col gap-2.5">
+        <h2 class="font-display text-[40px] font-bold">Ma façon de travailler</h2>
+        <p class="text-[17px] text-muted">Un outil n'a de valeur que s'il est utilisé. Chaque projet suit les mêmes trois étapes.</p>
+    </div>
+    <ol class="grid grid-cols-[repeat(auto-fit,minmax(min(280px,100%),1fr))] gap-6">
+        <li class="flex flex-col gap-3 rounded-2xl border border-line p-7">
+            <span class="font-display text-sm font-bold text-brand-700">01</span>
+            <h3 class="font-display text-[22px] font-semibold">Cadrer le besoin</h3>
+            <p class="leading-relaxed text-muted">Partir du terrain : qui perd du temps, sur quoi, et ce qu'un outil changerait concrètement.</p>
+        </li>
+        <li class="flex flex-col gap-3 rounded-2xl border border-line p-7">
+            <span class="font-display text-sm font-bold text-brand-700">02</span>
+            <h3 class="font-display text-[22px] font-semibold">Construire l'agent</h3>
+            <p class="leading-relaxed text-muted">Low-code quand ça suffit, Python quand il faut aller plus loin. Documenté et testable.</p>
+        </li>
+        <li class="flex flex-col gap-3 rounded-2xl border border-line p-7">
+            <span class="font-display text-sm font-bold text-brand-700">03</span>
+            <h3 class="font-display text-[22px] font-semibold">Accompagner l'usage</h3>
+            <p class="leading-relaxed text-muted">Former, recueillir les retours, ajuster, jusqu'à ce que l'outil fasse partie du quotidien.</p>
+        </li>
+    </ol>
+</section>
+
+{# ---------- Parcours ---------- #}
+<section class="bg-ink text-white">
+    <div class="mx-auto flex max-w-[1200px] flex-wrap gap-12 px-6 py-20">
+        <div class="flex flex-[1_1_320px] flex-col gap-4">
+            <p class="text-sm font-semibold uppercase tracking-[0.08em] text-brand-300">Parcours</p>
+            <h2 class="font-display text-4xl font-bold leading-tight">Du pilotage data à la construction d'agents IA</h2>
+        </div>
+        <ol class="flex flex-[1_1_520px] flex-col border-l border-ink-line">
+            {# À compléter : une entrée <li> par étape de votre parcours #}
+            <li class="relative flex flex-col gap-1.5 pb-10 pl-8">
+                <span class="absolute top-1.5 -left-[7px] size-3.5 rounded-full bg-brand-500" aria-hidden="true"></span>
+                <p class="text-sm font-semibold text-brand-300">[ANNÉES]</p>
+                <h3 class="font-display text-xl font-semibold">AI Builder</h3>
+                <p class="leading-relaxed text-line-strong">Je conçois des agents IA, des assistants et des pipelines data pour les équipes métier.</p>
+            </li>
+            <li class="relative flex flex-col gap-1.5 pl-8">
+                <span class="absolute top-1.5 -left-[7px] size-3.5 rounded-full border-2 border-brand-300 bg-ink" aria-hidden="true"></span>
+                <p class="text-sm font-semibold text-brand-300">[ANNÉES]</p>
+                <h3 class="font-display text-xl font-semibold">[POSTE] · Covéa</h3>
+                <p class="leading-relaxed text-line-strong">Acculturation data : environ 100 collaborateurs accompagnés vers l'usage de la donnée au quotidien.</p>
+            </li>
+        </ol>
+    </div>
+</section>
+
+{# ---------- Chiffres et stack ---------- #}
+<section class="mx-auto flex max-w-[1200px] flex-col gap-10 px-6 py-20">
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(min(220px,100%),1fr))] gap-4">
+        <div class="rounded-xl border border-line p-6">
+            <p class="font-display text-[40px] font-bold text-brand-600">~100</p>
+            <p class="text-sm text-subtle">collaborateurs accompagnés</p>
+        </div>
+        <div class="rounded-xl border border-line p-6">
+            <p class="font-display text-[40px] font-bold text-brand-600">{{ project_count }}</p>
+            <p class="text-sm text-subtle">{% if project_count > 1 %}projets publiés{% else %}projet publié{% endif %}</p>
+        </div>
+        <div class="rounded-xl border border-line p-6">
+            <p class="font-display text-[40px] font-bold text-brand-600">{{ post_count }}</p>
+            <p class="text-sm text-subtle">{% if post_count > 1 %}articles{% else %}article{% endif %}</p>
+        </div>
+    </div>
+
+    <div class="flex flex-col gap-4">
+        <h2 class="font-display text-[32px] font-bold">Ma stack</h2>
+        <p class="text-[17px] text-muted">Claude et n8n au quotidien, Python quand le low-code ne suffit pas.</p>
+        {% if techs %}
+        <ul class="flex flex-wrap gap-2" aria-label="Technologies utilisées dans mes projets">
+            {% for tech in techs %}
+            <li class="rounded-full border border-line-strong px-4 py-2 text-sm font-semibold">{{ tech.name }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</section>
+
+{% include "partials/contact_cta.html" %}
+
+{% endblock %}

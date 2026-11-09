@@ -1,6 +1,8 @@
 from django.db import models
-from tinymce.models import HTMLField
+from django.urls import reverse
+from django.utils import timezone
 from django.utils.text import slugify
+from tinymce.models import HTMLField
 
 # Create your models here.
 
@@ -17,9 +19,16 @@ class Post(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     content = HTMLField()
     tags = models.ManyToManyField(Tech, related_name="posts", blank=True)
+    published_at = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        ordering = ["-published_at"]
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse("post_detail", args=[self.slug])
 
     def save(self, *args, **kwargs):
         if not self.slug:

@@ -1,9 +1,169 @@
 {% extends "base.html" %}
 
-{% block title %}Accueil · Forge{% endblock %}
+{% block title %}Forge · Agents IA et pipelines data{% endblock %}
 
 {% block content %}
-<section class="flex items-center justify-center min-h-screen">
-    <h1 class="text-5xl font-bold">Hello There !</h1>
+
+{# ---------- Hero ---------- #}
+<section id="top" class="mx-auto flex max-w-[1200px] flex-col gap-7 px-6 pt-24 pb-16">
+    <p class="text-sm font-semibold uppercase tracking-[0.08em] text-brand-700">Data pipelines · AI agents · Business value</p>
+    <h1 class="max-w-[900px] font-display text-[clamp(40px,6vw,72px)] font-bold leading-[1.05]">
+        Je construis des agents IA qui font gagner du temps aux <span class="text-brand-500">équipes métier</span>.
+    </h1>
+    <p class="max-w-[680px] text-xl leading-relaxed text-muted">
+        Automatisations, assistants et pipelines data, du besoin terrain à l'usage quotidien. Chaque projet est documenté, testable et prêt à être réutilisé.
+    </p>
+    <div class="flex flex-wrap gap-3.5">
+        <a href="#projets" class="rounded-[10px] bg-brand-600 px-[26px] py-4 font-semibold text-white hover:bg-brand-700">Voir les projets</a>
+        <a href="#contact" class="rounded-[10px] border-[1.5px] border-line-strong bg-white px-[26px] py-[15px] font-semibold hover:border-ink">Me contacter</a>
+    </div>
+
+    {# Schéma : sources -> traitement -> usage métier #}
+    <div class="mt-8 flex flex-wrap items-center rounded-2xl border border-line bg-surface p-8">
+        <div class="flex flex-[1_1_200px] flex-col gap-1.5 p-2">
+            <p class="text-[13px] font-semibold uppercase tracking-[0.06em] text-subtle">Sources</p>
+            <p class="font-display text-xl font-semibold">Outlook, API, fichiers</p>
+        </div>
+        <div class="relative mx-2 h-0.5 flex-[1_1_80px] bg-brand-200" aria-hidden="true">
+            <span class="absolute -top-1 size-2.5 rounded-full bg-brand-500 animate-flow"></span>
+            <span class="absolute -top-1 size-2.5 rounded-full bg-brand-500 animate-flow [animation-delay:.8s]"></span>
+            <span class="absolute -top-1 size-2.5 rounded-full bg-brand-500 animate-flow [animation-delay:1.6s]"></span>
+        </div>
+        <div class="flex flex-[1_1_200px] flex-col gap-1.5 p-2">
+            <p class="text-[13px] font-semibold uppercase tracking-[0.06em] text-subtle">Traitement</p>
+            <p class="font-display text-xl font-semibold">Agent IA, RAG, pipeline</p>
+        </div>
+        <div class="relative mx-2 h-0.5 flex-[1_1_80px] bg-brand-200" aria-hidden="true">
+            <span class="absolute -top-1 size-2.5 rounded-full bg-brand-500 animate-flow"></span>
+            <span class="absolute -top-1 size-2.5 rounded-full bg-brand-500 animate-flow [animation-delay:.8s]"></span>
+            <span class="absolute -top-1 size-2.5 rounded-full bg-brand-500 animate-flow [animation-delay:1.6s]"></span>
+        </div>
+        <div class="flex flex-[1_1_200px] flex-col gap-1.5 p-2">
+            <p class="text-[13px] font-semibold uppercase tracking-[0.06em] text-subtle">Usage métier</p>
+            <p class="font-display text-xl font-semibold text-brand-700">Du temps gagné, chaque jour</p>
+        </div>
+    </div>
 </section>
+
+{# ---------- Projets ---------- #}
+<section id="projets" class="mx-auto flex max-w-[1200px] flex-col gap-8 px-6 py-16">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+        <div class="flex flex-col gap-2.5">
+            <h2 class="font-display text-[40px] font-bold">Projets</h2>
+            <p class="text-[17px] text-muted">Un problème métier, ce que j'ai construit, ce que ça change.</p>
+        </div>
+        {% if projects %}
+        <div class="flex flex-wrap gap-2" role="group" aria-label="Filtrer les projets">
+            <button type="button" data-filter="all" aria-pressed="true"
+                class="min-h-11 rounded-full border border-line-strong bg-white px-4 text-sm font-semibold text-ink aria-pressed:border-ink aria-pressed:bg-ink aria-pressed:text-white">Tous</button>
+            {% for value, label in categories %}
+            <button type="button" data-filter="{{ value }}" aria-pressed="false"
+                class="min-h-11 rounded-full border border-line-strong bg-white px-4 text-sm font-semibold text-ink aria-pressed:border-ink aria-pressed:bg-ink aria-pressed:text-white">{{ label }}</button>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="grid grid-cols-[repeat(auto-fill,minmax(min(340px,100%),1fr))] gap-6">
+        {% for project in projects %}
+        <article data-category="{{ project.category }}" class="flex flex-col overflow-hidden rounded-2xl border border-line bg-white">
+            <div class="relative flex h-[180px] items-center justify-center bg-brand-50">
+                <div class="flex size-16 items-center justify-center rounded-full bg-brand-600" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#ffffff"></path></svg>
+                </div>
+                <span class="absolute top-3 right-3.5 rounded-full bg-ink px-2.5 py-1 text-xs font-semibold text-white">{{ project.get_category_display }}</span>
+            </div>
+            <div class="flex grow flex-col gap-4 p-6">
+                <h3 class="font-display text-[22px] font-semibold leading-tight">{{ project.title }}</h3>
+                <div class="flex flex-col gap-2.5 text-[15px] leading-normal">
+                    <p><span class="font-semibold text-subtle">Problème · </span>{{ project.problem }}</p>
+                    <p><span class="font-semibold text-subtle">Solution · </span>{{ project.built }}</p>
+                    {% if project.result %}
+                    <p class="rounded-lg bg-surface px-3 py-2.5"><span class="font-semibold text-brand-700">Résultat · </span>{{ project.result }}</p>
+                    {% endif %}
+                </div>
+                {% with techs=project.stack.all %}
+                {% if techs %}
+                <p class="text-[13px] text-subtle">{% for tech in techs %}{{ tech.name }}{% if not forloop.last %} · {% endif %}{% endfor %}</p>
+                {% endif %}
+                {% endwith %}
+                {% if project.github_url %}
+                <div class="mt-auto flex gap-3">
+                    <a href="{{ project.github_url }}" target="_blank" rel="noopener" class="rounded-lg border border-line-strong px-[18px] py-[11px] text-sm font-semibold hover:border-ink">GitHub</a>
+                </div>
+                {% endif %}
+            </div>
+        </article>
+        {% empty %}
+        <p class="text-muted">Les projets arrivent bientôt.</p>
+        {% endfor %}
+    </div>
+</section>
+
+{# ---------- À propos ---------- #}
+<section id="apropos" class="bg-ink text-white">
+    <div class="mx-auto flex max-w-[1200px] flex-wrap items-center gap-12 px-6 py-20">
+        <div class="flex flex-[1_1_520px] flex-col gap-[18px]">
+            <p class="text-sm font-semibold uppercase tracking-[0.08em] text-brand-300">À propos</p>
+            <h2 class="font-display text-4xl font-bold leading-tight">J'ai fait adopter la data à 100 collaborateurs chez Covéa. Aujourd'hui, je construis les outils moi-même.</h2>
+            <p class="text-[17px] leading-relaxed text-line-strong">Florent Trouillet, AI Builder. Je fais le lien entre le terrain et la technique : cadrer un besoin, construire l'agent, puis l'accompagner jusqu'à l'usage.</p>
+            <a href="{% url 'about' %}" class="font-semibold text-brand-300 hover:text-white">En savoir plus →</a>
+        </div>
+        <div class="grid flex-[1_1_320px] grid-cols-2 gap-4">
+            <div class="rounded-xl border border-ink-line p-5">
+                <p class="font-display text-[32px] font-bold text-brand-300">~100</p>
+                <p class="text-sm text-line-strong">collaborateurs accompagnés</p>
+            </div>
+            <div class="rounded-xl border border-ink-line p-5">
+                <p class="font-display text-[32px] font-bold text-brand-300">{{ projects|length }}</p>
+                <p class="text-sm text-line-strong">projets publiés</p>
+            </div>
+            <div class="rounded-xl border border-ink-line p-5">
+                <p class="font-display text-[22px] font-bold">Claude · n8n</p>
+                <p class="text-sm text-line-strong">outils du quotidien</p>
+            </div>
+            <div class="rounded-xl border border-ink-line p-5">
+                <p class="font-display text-[22px] font-bold">Python</p>
+                <p class="text-sm text-line-strong">quand le low-code ne suffit pas</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# ---------- Articles ---------- #}
+<section id="articles" class="mx-auto flex max-w-[1200px] flex-col gap-6 px-6 py-[72px]">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+        <h2 class="font-display text-[32px] font-bold">Derniers articles</h2>
+        {% if posts %}<a href="{% url 'post_list' %}" class="font-semibold text-brand-700 hover:text-brand-800">Tous les articles →</a>{% endif %}
+    </div>
+    <div class="flex flex-col border-t border-line">
+        {% for post in posts %}
+        {% include "partials/post_row.html" %}
+        {% empty %}
+        <p class="border-b border-line py-5 text-muted">Pas encore d'article.</p>
+        {% endfor %}
+    </div>
+</section>
+
+{# ---------- Contact ---------- #}
+{% include "partials/contact_cta.html" %}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  // Filtre des projets par catégorie
+  const filterButtons = document.querySelectorAll("[data-filter]");
+  const projectCards = document.querySelectorAll("#projets article[data-category]");
+
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const filter = button.dataset.filter;
+      filterButtons.forEach((b) => b.setAttribute("aria-pressed", b === button ? "true" : "false"));
+      projectCards.forEach((card) => {
+        card.hidden = filter !== "all" && card.dataset.category !== filter;
+      });
+    });
+  });
+</script>
 {% endblock %}

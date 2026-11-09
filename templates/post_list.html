@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Articles · Forge{% endblock %}
+
+{% block content %}
+<section class="mx-auto flex max-w-[1200px] flex-col gap-8 px-6 pt-20 pb-24">
+    <div class="flex flex-col gap-3">
+        <p class="text-sm font-semibold uppercase tracking-[0.08em] text-brand-700">Articles</p>
+        <h1 class="font-display text-[clamp(36px,5vw,56px)] font-bold leading-[1.1]">
+            {% if active_tag %}Articles sur {{ active_tag.name }}{% else %}Ce que j'apprends en construisant{% endif %}
+        </h1>
+        <p class="max-w-[680px] text-lg leading-relaxed text-muted">Agents IA, automatisation et data : retours d'expérience et explications concrètes.</p>
+    </div>
+
+    {% if tags %}
+    <nav class="flex flex-wrap gap-2" aria-label="Filtrer par techno">
+        <a href="{% url 'post_list' %}"
+           class="inline-flex min-h-11 items-center rounded-full border px-4 text-sm font-semibold {% if not active_tag %}border-ink bg-ink text-white{% else %}border-line-strong bg-white hover:border-ink{% endif %}"
+           {% if not active_tag %}aria-current="page"{% endif %}>Tous</a>
+        {% for tag in tags %}
+        <a href="{% url 'post_list' %}?tag={{ tag.name|urlencode }}"
+           class="inline-flex min-h-11 items-center rounded-full border px-4 text-sm font-semibold {% if tag == active_tag %}border-ink bg-ink text-white{% else %}border-line-strong bg-white hover:border-ink{% endif %}"
+           {% if tag == active_tag %}aria-current="page"{% endif %}>{{ tag.name }}</a>
+        {% endfor %}
+    </nav>
+    {% endif %}
+
+    <div class="flex flex-col border-t border-line">
+        {% for post in posts %}
+        {% include "partials/post_row.html" %}
+        {% empty %}
+        <p class="border-b border-line py-5 text-muted">Pas encore d'article.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
