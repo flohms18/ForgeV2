@@ -8,11 +8,12 @@
 <section class="mx-auto flex max-w-[1200px] flex-wrap items-center gap-12 px-6 pt-20 pb-16">
     <div class="flex flex-[1_1_560px] flex-col gap-6">
         <p class="text-sm font-semibold uppercase tracking-[0.08em] text-brand-700">À propos</p>
+        <p class="text-xl leading-relaxed text-muted"><span class="font-semibold text-brand-600">Forge</span> est mon espace personnel. Mes réalisations techniques y suivent un fil rouge :</p>
         <h1 class="font-display text-[clamp(36px,5vw,56px)] font-bold leading-[1.1]">
-            J'ai fait adopter la data à 100 collaborateurs chez Covéa. Aujourd'hui, je construis les outils <span class="text-brand-500">moi-même</span>.
+            Faire de l'IA agentique le pont entre la donnée brute et la <span class="text-brand-500">valeur métier</span>.
         </h1>
         <p class="max-w-[640px] text-xl leading-relaxed text-muted">
-            Florent Trouillet, AI Builder. Je fais le lien entre le terrain et la technique : cadrer un besoin, construire l'agent, puis l'accompagner jusqu'à l'usage.
+            Florent Trouillet, développeur IA. Je fais le lien entre le terrain et la technique : cadrer un besoin, construire l'agent, puis l'accompagner jusqu'à l'usage.
         </p>
     </div>
     {# Remplacer par une photo : <img src="{% static 'img/portrait.jpg' %}" alt="Florent Trouillet" class="..."> #}
@@ -56,7 +57,7 @@
             <li class="relative flex flex-col gap-1.5 pb-10 pl-8">
                 <span class="absolute top-1.5 -left-[7px] size-3.5 rounded-full bg-brand-500" aria-hidden="true"></span>
                 <p class="text-sm font-semibold text-brand-300">[ANNÉES]</p>
-                <h3 class="font-display text-xl font-semibold">AI Builder</h3>
+                <h3 class="font-display text-xl font-semibold">Développeur IA</h3>
                 <p class="leading-relaxed text-line-strong">Je conçois des agents IA, des assistants et des pipelines data pour les équipes métier.</p>
             </li>
             <li class="relative flex flex-col gap-1.5 pl-8">
@@ -99,6 +100,5 @@
     </div>
 </section>
 
-{% include "partials/contact_cta.html" %}
 
 {% endblock %}

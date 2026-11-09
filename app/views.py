@@ -9,6 +9,7 @@ def home(request):
     return render(request, "home.html", {
         "projects": projects,
         "posts": posts,
+        "agent_count": Project.objects.filter(category=Project.Category.AGENT).count(),
         "categories": Project.Category.choices,
     })
 
@@ -43,7 +44,9 @@ def post_list(request):
 def post_detail(request, slug):
     post = get_object_or_404(Post.objects.prefetch_related("tags"), slug=slug)
     other_posts = Post.objects.exclude(pk=post.pk)[:3]
-    return render(request, "post_detail.html", {
+    # Un article peut avoir sa propre page : templates/posts/<slug>.html
+    # Sinon, gabarit générique alimenté par le contenu TinyMCE.
+    return render(request, [f"posts/{post.slug}.html", "post_detail.html"], {
         "post": post,
         "other_posts": other_posts,
     })

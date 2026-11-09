@@ -8,40 +8,14 @@
 <section id="top" class="mx-auto flex max-w-[1200px] flex-col gap-7 px-6 pt-24 pb-16">
     <p class="text-sm font-semibold uppercase tracking-[0.08em] text-brand-700">Data pipelines · AI agents · Business value</p>
     <h1 class="max-w-[900px] font-display text-[clamp(40px,6vw,72px)] font-bold leading-[1.05]">
-        Je construis des agents IA qui font gagner du temps aux <span class="text-brand-500">équipes métier</span>.
+        Je construis des agents IA qui partent d'un vrai <span class="text-brand-500">besoin métier</span>, pour être utilisés au quotidien.
     </h1>
     <p class="max-w-[680px] text-xl leading-relaxed text-muted">
-        Automatisations, assistants et pipelines data, du besoin terrain à l'usage quotidien. Chaque projet est documenté, testable et prêt à être réutilisé.
+        Automatisations, assistants et pipelines data, du cadrage du besoin terrain à l'usage quotidien. Chaque projet est documenté, testable et prêt à être réutilisé.
     </p>
     <div class="flex flex-wrap gap-3.5">
         <a href="#projets" class="rounded-[10px] bg-brand-600 px-[26px] py-4 font-semibold text-white hover:bg-brand-700">Voir les projets</a>
-        <a href="#contact" class="rounded-[10px] border-[1.5px] border-line-strong bg-white px-[26px] py-[15px] font-semibold hover:border-ink">Me contacter</a>
-    </div>
-
-    {# Schéma : sources -> traitement -> usage métier #}
-    <div class="mt-8 flex flex-wrap items-center rounded-2xl border border-line bg-surface p-8">
-        <div class="flex flex-[1_1_200px] flex-col gap-1.5 p-2">
-            <p class="text-[13px] font-semibold uppercase tracking-[0.06em] text-subtle">Sources</p>
-            <p class="font-display text-xl font-semibold">Outlook, API, fichiers</p>
-        </div>
-        <div class="relative mx-2 h-0.5 flex-[1_1_80px] bg-brand-200" aria-hidden="true">
-            <span class="absolute -top-1 size-2.5 rounded-full bg-brand-500 animate-flow"></span>
-            <span class="absolute -top-1 size-2.5 rounded-full bg-brand-500 animate-flow [animation-delay:.8s]"></span>
-            <span class="absolute -top-1 size-2.5 rounded-full bg-brand-500 animate-flow [animation-delay:1.6s]"></span>
-        </div>
-        <div class="flex flex-[1_1_200px] flex-col gap-1.5 p-2">
-            <p class="text-[13px] font-semibold uppercase tracking-[0.06em] text-subtle">Traitement</p>
-            <p class="font-display text-xl font-semibold">Agent IA, RAG, pipeline</p>
-        </div>
-        <div class="relative mx-2 h-0.5 flex-[1_1_80px] bg-brand-200" aria-hidden="true">
-            <span class="absolute -top-1 size-2.5 rounded-full bg-brand-500 animate-flow"></span>
-            <span class="absolute -top-1 size-2.5 rounded-full bg-brand-500 animate-flow [animation-delay:.8s]"></span>
-            <span class="absolute -top-1 size-2.5 rounded-full bg-brand-500 animate-flow [animation-delay:1.6s]"></span>
-        </div>
-        <div class="flex flex-[1_1_200px] flex-col gap-1.5 p-2">
-            <p class="text-[13px] font-semibold uppercase tracking-[0.06em] text-subtle">Usage métier</p>
-            <p class="font-display text-xl font-semibold text-brand-700">Du temps gagné, chaque jour</p>
-        </div>
+        <a href="https://www.linkedin.com/in/florent-trouillet/" target="_blank" rel="noopener" class="rounded-[10px] border-[1.5px] border-line-strong bg-white px-[26px] py-[15px] font-semibold hover:border-ink">Me contacter</a>
     </div>
 </section>
 
@@ -50,7 +24,7 @@
     <div class="flex flex-wrap items-end justify-between gap-4">
         <div class="flex flex-col gap-2.5">
             <h2 class="font-display text-[40px] font-bold">Projets</h2>
-            <p class="text-[17px] text-muted">Un problème métier, ce que j'ai construit, ce que ça change.</p>
+            <p class="text-[17px] text-muted">Un besoin métier, ce que j'ai construit, ce que ça change.</p>
         </div>
         {% if projects %}
         <div class="flex flex-wrap gap-2" role="group" aria-label="Filtrer les projets">
@@ -105,8 +79,9 @@
     <div class="mx-auto flex max-w-[1200px] flex-wrap items-center gap-12 px-6 py-20">
         <div class="flex flex-[1_1_520px] flex-col gap-[18px]">
             <p class="text-sm font-semibold uppercase tracking-[0.08em] text-brand-300">À propos</p>
-            <h2 class="font-display text-4xl font-bold leading-tight">J'ai fait adopter la data à 100 collaborateurs chez Covéa. Aujourd'hui, je construis les outils moi-même.</h2>
-            <p class="text-[17px] leading-relaxed text-line-strong">Florent Trouillet, AI Builder. Je fais le lien entre le terrain et la technique : cadrer un besoin, construire l'agent, puis l'accompagner jusqu'à l'usage.</p>
+            <p class="text-lg leading-relaxed text-line-strong"><span class="font-semibold text-brand-300">Forge</span> est mon espace personnel. Mes réalisations techniques y suivent un fil rouge :</p>
+            <h2 class="font-display text-[clamp(32px,4.5vw,48px)] font-bold leading-[1.1]">Faire de l'IA agentique le pont entre la donnée brute et la <span class="text-brand-300">valeur métier</span>.</h2>
+            <p class="text-[17px] leading-relaxed text-line-strong">Florent Trouillet, développeur IA. Je fais le lien entre le terrain et la technique : cadrer un besoin, construire l'agent, puis l'accompagner jusqu'à l'usage.</p>
             <a href="{% url 'about' %}" class="font-semibold text-brand-300 hover:text-white">En savoir plus →</a>
         </div>
         <div class="grid flex-[1_1_320px] grid-cols-2 gap-4">
@@ -115,16 +90,8 @@
                 <p class="text-sm text-line-strong">collaborateurs accompagnés</p>
             </div>
             <div class="rounded-xl border border-ink-line p-5">
-                <p class="font-display text-[32px] font-bold text-brand-300">{{ projects|length }}</p>
-                <p class="text-sm text-line-strong">projets publiés</p>
-            </div>
-            <div class="rounded-xl border border-ink-line p-5">
-                <p class="font-display text-[22px] font-bold">Claude · n8n</p>
-                <p class="text-sm text-line-strong">outils du quotidien</p>
-            </div>
-            <div class="rounded-xl border border-ink-line p-5">
-                <p class="font-display text-[22px] font-bold">Python</p>
-                <p class="text-sm text-line-strong">quand le low-code ne suffit pas</p>
+                <p class="font-display text-[32px] font-bold text-brand-300">{{ agent_count }}</p>
+                <p class="text-sm text-line-strong">{% if agent_count > 1 %}agents déployés{% else %}agent déployé{% endif %}</p>
             </div>
         </div>
     </div>
@@ -145,8 +112,6 @@
     </div>
 </section>
 
-{# ---------- Contact ---------- #}
-{% include "partials/contact_cta.html" %}
 
 {% endblock %}
 

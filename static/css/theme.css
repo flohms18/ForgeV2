@@ -1,8 +1,8 @@
-/* Couleurs et animations du site, utilisables comme classes Tailwind
-   (ex. text-ink, bg-brand-600, border-line, animate-flow) */
+/* Couleurs du site, utilisables comme classes Tailwind
+   (ex. text-ink, bg-brand-600, border-line) */
 
 @theme {
-  --color-ink: #141826;
+  --color-ink: #141B33;
   --color-ink-line: #343B52;
   --color-muted: #4A5163;
   --color-subtle: #5B6275;
@@ -17,13 +17,4 @@
   --color-brand-600: #3D5CE0;
   --color-brand-700: #3048C9;
   --color-brand-800: #1F33A0;
-
-  --animate-flow: flow 2.4s linear infinite;
-
-  @keyframes flow {
-    0% { left: 0%; opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { left: 100%; opacity: 0; }
-  }
 }
