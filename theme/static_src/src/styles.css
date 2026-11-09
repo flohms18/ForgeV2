@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "../../../static/css/fonts.css";
 @import "../../../static/css/theme.css";
+@import "../../../static/css/animations.css";
 @plugin "@tailwindcss/typography";
 
 /**

@@ -3,6 +3,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <script>document.documentElement.classList.add("js")</script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Forge{% endblock %}</title>
     <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
@@ -12,15 +13,16 @@
 <body class="bg-white font-sans text-ink antialiased">
     <header class="border-b border-line">
         <nav class="mx-auto flex max-w-[1200px] flex-wrap items-center justify-between gap-4 px-6 py-5">
-            <a href="{% url 'home' %}" class="flex items-center gap-2.5 font-display text-2xl font-bold text-ink">
-                <img src="{% static 'img/forge-mark.svg' %}" alt="" width="36" height="36" class="size-9">
+            <a href="{% url 'home' %}" class="group flex items-center gap-2.5 font-display text-2xl font-bold text-ink">
+                <img src="{% static 'img/forge-mark.svg' %}" alt="" width="36" height="36" class="size-9 transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110">
                 <span>Forge</span>
             </a>
             <div class="flex flex-wrap items-center gap-7 text-[15px] font-medium">
-                <a href="{% url 'home' %}#projets" class="hover:text-brand-700">Projets</a>
-                <a href="{% url 'post_list' %}" class="hover:text-brand-700">Articles</a>
-                <a href="{% url 'about' %}" class="hover:text-brand-700">À propos</a>
-                <a href="https://www.linkedin.com/in/florent-trouillet/" target="_blank" rel="noopener" class="rounded-lg bg-brand-600 px-[18px] py-2.5 text-white hover:bg-brand-700">Me contacter</a>
+                <a href="{% url 'home' %}#projets" class="nav-link hover:text-brand-700">Projets</a>
+                <a href="{% url 'post_list' %}" class="nav-link hover:text-brand-700">Articles</a>
+                <a href="{% url 'about' %}" class="nav-link hover:text-brand-700">À propos</a>
+                <a href="{% url 'post_detail' 'agent-ia' %}" class="nav-link text-brand-500 hover:text-brand-700">C'est quoi un agent IA&nbsp;?</a>
+
             </div>
         </nav>
     </header>
@@ -33,6 +35,26 @@
         <img src="{% static 'img/forge-avatar.svg' %}" alt="" width="24" height="24" class="size-6">
         <span>Made by F.T</span>
     </footer>
+
+    <script>
+      // Apparition au scroll des éléments [data-reveal]
+      (() => {
+        const items = document.querySelectorAll("[data-reveal]");
+        if (!("IntersectionObserver" in window)) {
+          items.forEach((el) => el.classList.add("is-visible"));
+          return;
+        }
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+        items.forEach((el) => observer.observe(el));
+      })();
+    </script>
 
     {% block scripts %}{% endblock %}
 </body>
