@@ -47,7 +47,7 @@ class Project(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     problem = models.CharField(max_length=200)
     category = models.CharField(max_length=20, choices=Category.choices)
-    built = models.TextField() 
+    solution = models.TextField()
     result = models.CharField(max_length=200, blank=True)            
     github_url = models.URLField(blank=True)
     stack = models.ManyToManyField(Tech, related_name="projects", blank=True)
