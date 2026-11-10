@@ -40,7 +40,7 @@
 
     <div class="grid grid-cols-[repeat(auto-fill,minmax(min(340px,100%),1fr))] gap-6">
         {% for project in projects %}
-        <article data-reveal style="--delay:{% cycle '0ms' '90ms' '180ms' %}" data-category="{{ project.category }}" class="lift group flex flex-col overflow-hidden rounded-2xl border border-line bg-white">
+        <article data-reveal data-category="{{ project.category }}" class="{% cycle '[--delay:0ms]' '[--delay:90ms]' '[--delay:180ms]' %} lift group flex flex-col overflow-hidden rounded-2xl border border-line bg-white">
             <div class="relative flex h-[180px] items-center justify-center bg-brand-50">
                 <div class="play-pulse flex size-16 items-center justify-center rounded-full bg-brand-600 transition-transform duration-300 group-hover:scale-110" aria-hidden="true">
                     <svg width="24" height="24" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#ffffff"></path></svg>
