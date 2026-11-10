@@ -31,9 +31,35 @@
         {% block content %}{% endblock %}
     </main>
 
-    <footer class="flex items-center justify-center gap-2.5 border-t border-line p-6 text-sm text-subtle">
-        <img src="{% static 'img/forge-avatar.svg' %}" alt="" width="24" height="24" class="size-6">
-        <span>Made by F.T</span>
+    <footer class="border-t border-line bg-surface">
+        <div class="mx-auto grid max-w-[1200px] gap-10 px-6 pt-14 pb-10 sm:grid-cols-[2fr_1fr]">
+            <div class="flex flex-col gap-4">
+                <a href="{% url 'home' %}" class="group flex w-fit items-center gap-2.5 font-display text-xl font-bold text-ink">
+                    <img src="{% static 'img/forge-mark.svg' %}" alt="" width="32" height="32" class="size-8 transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110">
+                    <span>Forge</span>
+                </a>
+                <p class="max-w-[380px] text-[15px] leading-relaxed text-muted">
+                    Agents IA et pipelines data, construits à partir d'un vrai besoin métier.
+                </p>
+            </div>
+
+            <nav aria-label="Pied de page" class="flex flex-col gap-3 text-[15px]">
+                <p class="text-xs font-semibold uppercase tracking-[0.08em] text-subtle">Navigation</p>
+                <a href="{% url 'home' %}#projets" class="nav-link w-fit text-ink hover:text-brand-700">Projets</a>
+                <a href="{% url 'post_list' %}" class="nav-link w-fit text-ink hover:text-brand-700">Articles</a>
+                <a href="{% url 'about' %}" class="nav-link w-fit text-ink hover:text-brand-700">À propos</a>
+                <a href="{% url 'post_detail' 'agent-ia' %}" class="nav-link w-fit text-ink hover:text-brand-700">C'est quoi un agent IA&nbsp;?</a>
+            </nav>
+        </div>
+
+        <div class="border-t border-line">
+            <div class="mx-auto flex max-w-[1200px] items-center justify-center px-6 py-5 text-sm text-subtle">
+                <p class="flex items-center gap-2.5">
+                    <img src="{% static 'img/forge-avatar.svg' %}" alt="" width="24" height="24" class="size-6">
+                    <span>Made by F.T</span>
+                </p>
+            </div>
+        </div>
     </footer>
 
     <script>
