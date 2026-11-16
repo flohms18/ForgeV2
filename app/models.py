@@ -49,13 +49,17 @@ class Project(models.Model):
     category = models.CharField(max_length=20, choices=Category.choices)
     image = models.ImageField(upload_to="projects/", blank=True)
     solution = models.TextField()
-    impact = models.CharField(max_length=200, blank=True)            
+    impact = models.CharField(max_length=200, blank=True)
+    content = HTMLField(blank=True, help_text="Article détaillé du projet (page projet)")
     github_url = models.URLField(blank=True)
     stack = models.ManyToManyField(Tech, related_name="projects", blank=True)
 
     def __str__(self):
         return self.title
-    
+
+    def get_absolute_url(self):
+        return reverse("project_detail", args=[self.slug])
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)

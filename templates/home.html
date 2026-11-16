@@ -40,7 +40,7 @@
 
     <div class="grid grid-cols-[repeat(auto-fill,minmax(min(340px,100%),1fr))] gap-6">
         {% for project in projects %}
-        <article data-reveal data-category="{{ project.category }}" class="{% cycle '[--delay:0ms]' '[--delay:90ms]' '[--delay:180ms]' %} lift group flex flex-col overflow-hidden rounded-2xl border border-line bg-white">
+        <article data-reveal data-category="{{ project.category }}" class="{% cycle '[--delay:0ms]' '[--delay:90ms]' '[--delay:180ms]' %} lift group relative flex flex-col overflow-hidden rounded-2xl border border-line bg-white">
             <div class="relative h-[180px] overflow-hidden bg-brand-50">
                 {% if project.image %}
                 <img src="{{ project.image.url }}" alt="" loading="lazy" class="size-full object-cover transition-transform duration-500 group-hover:scale-105">
@@ -48,12 +48,15 @@
                 <span class="absolute top-3 right-3.5 rounded-full bg-ink px-2.5 py-1 text-xs font-semibold text-white">{{ project.get_category_display }}</span>
             </div>
             <div class="flex grow flex-col gap-4 p-6">
-                <h3 class="font-display text-[22px] font-semibold leading-tight">{{ project.title }}</h3>
+                <h3 class="font-display text-[22px] font-semibold leading-tight">
+                    {# Le lien couvre toute la carte (after:inset-0) #}
+                    <a href="{{ project.get_absolute_url }}" class="after:absolute after:inset-0 group-hover:text-brand-700">{{ project.title }}</a>
+                </h3>
                 <div class="flex flex-col gap-2.5 text-[15px] leading-normal">
                     <p><span class="font-semibold text-subtle">Problème · </span>{{ project.problem }}</p>
                     <p><span class="font-semibold text-subtle">Solution · </span>{{ project.solution }}</p>
-                    {% if project.result %}
-                    <p class="rounded-lg bg-surface px-3 py-2.5"><span class="font-semibold text-brand-700">Résultat · </span>{{ project.result }}</p>
+                    {% if project.impact %}
+                    <p class="rounded-lg bg-surface px-3 py-2.5"><span class="font-semibold text-brand-700">Impact · </span>{{ project.impact }}</p>
                     {% endif %}
                 </div>
                 {% with techs=project.stack.all %}
@@ -63,7 +66,7 @@
                 {% endwith %}
                 {% if project.github_url %}
                 <div class="mt-auto flex gap-3">
-                    <a href="{{ project.github_url }}" target="_blank" rel="noopener" class="rounded-lg border border-line-strong px-[18px] py-[11px] text-sm font-semibold transition-colors duration-200 hover:border-ink hover:bg-surface">GitHub</a>
+                    <a href="{{ project.github_url }}" target="_blank" rel="noopener" class="relative z-10 rounded-lg border border-line-strong px-[18px] py-[11px] text-sm font-semibold transition-colors duration-200 hover:border-ink hover:bg-surface">GitHub</a>
                 </div>
                 {% endif %}
             </div>

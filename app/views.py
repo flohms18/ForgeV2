@@ -17,6 +17,15 @@ def about(request):
     return render(request, "about.html")
 
 
+def project_detail(request, slug):
+    project = get_object_or_404(Project.objects.prefetch_related("stack"), slug=slug)
+    other_projects = Project.objects.exclude(pk=project.pk).order_by("-id")[:3]
+    return render(request, "project_detail.html", {
+        "project": project,
+        "other_projects": other_projects,
+    })
+
+
 def post_list(request):
     posts = Post.objects.prefetch_related("tags")
     active_tag = None
