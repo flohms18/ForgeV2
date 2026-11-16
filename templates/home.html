@@ -6,12 +6,12 @@
 
 {# ---------- Hero ---------- #}
 <section id="top" class="mx-auto flex max-w-[1200px] flex-col gap-7 px-6 pt-24 pb-16">
-    <p class="anim-in text-sm font-semibold uppercase tracking-[0.08em] text-brand-700">Open data · AI agents · Real impact</p>
+    <p class="anim-in text-sm font-semibold uppercase tracking-[0.08em] text-brand-700">Data · AI agents · Real impact</p>
     <h1 style="--delay:100ms" class="anim-in max-w-[900px] font-display text-[clamp(40px,6vw,72px)] font-bold leading-[1.05]">
-        Je transforme l'open data en agents IA qui ont un <span class="text-brand-500">impact concret</span> au quotidien.
+        Je transforme la donnée en agents IA qui ont un <span class="text-brand-500">impact concret</span> au quotidien.
     </h1>
     <p style="--delay:220ms" class="anim-in max-w-[680px] text-xl leading-relaxed text-muted">
-        Automatisations, assistants IA et pipelines data construits sur des données publiques. Chaque projet est documenté, testable et réutilisable.
+        Automatisations, assistants IA et pipelines data construits sur des données ouvertes et des API. Chaque projet est documenté, testable et réutilisable.
     </p>
     <div style="--delay:340ms" class="anim-in flex flex-wrap gap-3.5">
         <a href="{% url 'post_detail' 'agent-ia' %}" class="lift rounded-[10px] bg-brand-600 px-[26px] py-4 font-semibold text-white hover:bg-brand-700">C'est quoi un agent IA&nbsp;?</a>
@@ -41,10 +41,10 @@
     <div class="grid grid-cols-[repeat(auto-fill,minmax(min(340px,100%),1fr))] gap-6">
         {% for project in projects %}
         <article data-reveal data-category="{{ project.category }}" class="{% cycle '[--delay:0ms]' '[--delay:90ms]' '[--delay:180ms]' %} lift group flex flex-col overflow-hidden rounded-2xl border border-line bg-white">
-            <div class="relative flex h-[180px] items-center justify-center bg-brand-50">
-                <div class="play-pulse flex size-16 items-center justify-center rounded-full bg-brand-600 transition-transform duration-300 group-hover:scale-110" aria-hidden="true">
-                    <svg width="24" height="24" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#ffffff"></path></svg>
-                </div>
+            <div class="relative h-[180px] overflow-hidden bg-brand-50">
+                {% if project.image %}
+                <img src="{{ project.image.url }}" alt="" loading="lazy" class="size-full object-cover transition-transform duration-500 group-hover:scale-105">
+                {% endif %}
                 <span class="absolute top-3 right-3.5 rounded-full bg-ink px-2.5 py-1 text-xs font-semibold text-white">{{ project.get_category_display }}</span>
             </div>
             <div class="flex grow flex-col gap-4 p-6">
@@ -80,19 +80,9 @@
         <div data-reveal class="flex flex-[1_1_520px] flex-col gap-[18px]">
             <p class="text-sm font-semibold uppercase tracking-[0.08em] text-brand-300">À propos</p>
             <p class="text-lg leading-relaxed text-line-strong"><span class="font-semibold text-brand-300">Forge</span> est mon espace personnel. Mes réalisations techniques y suivent un fil rouge :</p>
-            <h2 class="font-display text-[clamp(32px,4.5vw,48px)] font-bold leading-[1.1]">Faire de l'IA agentique le pont entre l'open data et l'<span class="text-brand-300">impact concret</span>.</h2>
+            <h2 class="font-display text-[clamp(32px,4.5vw,48px)] font-bold leading-[1.1]">Faire de l'IA agentique le pont entre la donnée brute et l'<span class="text-brand-300">impact concret</span>.</h2>
             <p class="text-[17px] leading-relaxed text-line-strong">Florent Trouillet, développeur IA. Je fais le lien entre le terrain et la technique : cadrer un besoin, construire l'agent, puis l'accompagner jusqu'à l'usage.</p>
             <a href="{% url 'about' %}" class="arrow-link font-semibold text-brand-300 transition-colors duration-200 hover:text-white">En savoir plus <span class="arrow">→</span></a>
-        </div>
-        <div data-reveal style="--delay:150ms" class="grid flex-[1_1_320px] grid-cols-2 gap-4">
-            <div class="rounded-xl border border-ink-line p-5 transition-colors duration-300 hover:border-brand-300">
-                <p class="font-display text-[32px] font-bold text-github-green">~<span data-count="100">100</span></p>
-                <p class="text-sm text-line-strong">collaborateurs accompagnés</p>
-            </div>
-            <div class="rounded-xl border border-ink-line p-5 transition-colors duration-300 hover:border-brand-300">
-                <p class="font-display text-[32px] font-bold text-github-green"><span data-count="{{ agent_count }}">{{ agent_count }}</span></p>
-                <p class="text-sm text-line-strong">{% if agent_count > 1 %}agents déployés{% else %}mis en production{% endif %}</p>
-            </div>
         </div>
     </div>
 </section>
@@ -139,30 +129,5 @@
       });
     });
   });
-
-  // Compteurs animés (section À propos)
-  const counters = document.querySelectorAll("[data-count]");
-  if (!reduceMotion && "IntersectionObserver" in window) {
-    const countObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const el = entry.target;
-        const target = parseInt(el.dataset.count, 10) || 0;
-        const start = performance.now();
-        const duration = 1200;
-        const tick = (now) => {
-          const t = Math.min((now - start) / duration, 1);
-          el.textContent = Math.round(target * (1 - Math.pow(1 - t, 3)));
-          if (t < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-        countObserver.unobserve(el);
-      });
-    }, { threshold: 0.6 });
-    counters.forEach((el) => {
-      el.textContent = "0";
-      countObserver.observe(el);
-    });
-  }
 </script>
 {% endblock %}

@@ -135,6 +135,10 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+# Fichiers envoyés depuis l'admin (images des projets)
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 # WhiteNoise sert les fichiers statiques en production (compressés, avec cache long)
 STORAGES = {
     'default': {

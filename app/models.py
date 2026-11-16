@@ -47,6 +47,7 @@ class Project(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     problem = models.CharField(max_length=200)
     category = models.CharField(max_length=20, choices=Category.choices)
+    image = models.ImageField(upload_to="projects/", blank=True)
     solution = models.TextField()
     impact = models.CharField(max_length=200, blank=True)            
     github_url = models.URLField(blank=True)

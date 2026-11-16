@@ -9,7 +9,6 @@ def home(request):
     return render(request, "home.html", {
         "projects": projects,
         "posts": posts,
-        "agent_count": Project.objects.filter(category=Project.Category.AGENT).count(),
         "categories": Project.Category.choices,
     })
 
