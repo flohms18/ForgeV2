@@ -15,13 +15,7 @@ def home(request):
 
 
 def about(request):
-    # Les technos réellement utilisées dans les projets publiés
-    techs = Tech.objects.filter(projects__isnull=False).distinct().order_by("name")
-    return render(request, "about.html", {
-        "techs": techs,
-        "project_count": Project.objects.count(),
-        "post_count": Post.objects.count(),
-    })
+    return render(request, "about.html")
 
 
 def post_list(request):
