@@ -5,10 +5,12 @@ from .models import Post, Project, Tech
 
 def home(request):
     projects = Project.objects.prefetch_related("stack").order_by("-id")
-    posts = Post.objects.prefetch_related("tags")[:3]
+    posts = Post.objects.prefetch_related("tags")
+    tags = Tech.objects.filter(posts__isnull=False).distinct().order_by("name")
     return render(request, "home.html", {
         "projects": projects,
         "posts": posts,
+        "tags": tags,
         "categories": Project.Category.choices,
     })
 
@@ -23,23 +25,6 @@ def project_detail(request, slug):
     return render(request, "project_detail.html", {
         "project": project,
         "other_projects": other_projects,
-    })
-
-
-def post_list(request):
-    posts = Post.objects.prefetch_related("tags")
-    active_tag = None
-
-    tag_name = request.GET.get("tag")
-    if tag_name:
-        active_tag = get_object_or_404(Tech, name=tag_name)
-        posts = posts.filter(tags=active_tag)
-
-    tags = Tech.objects.filter(posts__isnull=False).distinct().order_by("name")
-    return render(request, "post_list.html", {
-        "posts": posts,
-        "tags": tags,
-        "active_tag": active_tag,
     })
 
 

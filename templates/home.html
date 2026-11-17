@@ -93,8 +93,20 @@
 {# ---------- Articles ---------- #}
 <section id="articles" class="mx-auto flex max-w-[1200px] flex-col gap-6 px-6 py-[72px]">
     <div data-reveal class="flex flex-wrap items-end justify-between gap-4">
-        <h2 class="font-display text-[32px] font-bold">Derniers articles</h2>
-        {% if posts %}<a href="{% url 'post_list' %}" class="arrow-link font-semibold text-brand-700 transition-colors duration-200 hover:text-brand-800">Tous les articles <span class="arrow">→</span></a>{% endif %}
+        <div class="flex flex-col gap-2.5">
+            <h2 class="font-display text-[40px] font-bold">Articles</h2>
+            <p class="max-w-[680px] text-[17px] text-muted">Agents IA, automatisation et data : retours d'expérience et explications concrètes.</p>
+        </div>
+        {% if tags %}
+        <div class="flex flex-wrap gap-2" role="group" aria-label="Filtrer les articles par techno">
+            <button type="button" data-post-filter="all" aria-pressed="true"
+                class="min-h-11 rounded-full border border-line-strong bg-white px-4 text-sm font-semibold text-ink aria-pressed:border-ink aria-pressed:bg-ink aria-pressed:text-white transition-colors duration-200 hover:border-ink">Tous</button>
+            {% for tag in tags %}
+            <button type="button" data-post-filter="{{ tag.name }}" aria-pressed="false"
+                class="min-h-11 rounded-full border border-line-strong bg-white px-4 text-sm font-semibold text-ink aria-pressed:border-ink aria-pressed:bg-ink aria-pressed:text-white transition-colors duration-200 hover:border-ink">{{ tag.name }}</button>
+            {% endfor %}
+        </div>
+        {% endif %}
     </div>
     <div data-reveal style="--delay:100ms" class="flex flex-col border-t border-line">
         {% for post in posts %}
@@ -132,5 +144,25 @@
       });
     });
   });
+
+  // Filtre des articles par techno (?tag=Python présélectionne le filtre)
+  const postButtons = document.querySelectorAll("[data-post-filter]");
+  const postRows = document.querySelectorAll("#articles article[data-tags]");
+
+  const filterPosts = (tag) => {
+    postButtons.forEach((b) => b.setAttribute("aria-pressed", b.dataset.postFilter === tag ? "true" : "false"));
+    postRows.forEach((row) => {
+      row.hidden = tag !== "all" && !row.dataset.tags.split("|").includes(tag);
+    });
+  };
+
+  postButtons.forEach((button) => {
+    button.addEventListener("click", () => filterPosts(button.dataset.postFilter));
+  });
+
+  const tagParam = new URLSearchParams(window.location.search).get("tag");
+  if (tagParam && [...postButtons].some((b) => b.dataset.postFilter === tagParam)) {
+    filterPosts(tagParam);
+  }
 </script>
 {% endblock %}
